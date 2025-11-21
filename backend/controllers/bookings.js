@@ -33,6 +33,10 @@ exports.getBooking = async (req, res, next) => {
     try {
         const booking = await Booking.findById(req.params.id).populate({ path: 'campground', select: 'name address tel' });
 
+        if (booking.user.toString() !== req.user.id && req.user.role !== 'admin') {
+            return res.status(401).json({ success: false, message: 'Not authorized to get this booking' });
+        }
+
         if (!booking) {
             return res.status(404).json({ success: false, message: 'Booking not found' });
         }
