@@ -10,10 +10,10 @@ const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
 const {xss} = require('express-xss-sanitizer');
 
-const rateLimit=require('express-rate-limit');
+const rateLimit = require('express-rate-limit');
 
-const swaggerJsDoc = require('swagger-jsdoc');
-const swaggerUI =  require('swagger-ui-express');
+// const swaggerJsDoc = require('swagger-jsdoc');
+// const swaggerUI =  require('swagger-ui-express');
 
 // Load env vars
 dotenv.config({ path: './config/config.env' });
@@ -51,25 +51,25 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // Swagger options
-const swaggerOptions = {
-  swaggerDefinition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'Libary API',
-      version: '1.0.0',
-      description: 'A simple libary API'
-    },
-    servers: [
-      {
-        url: 'http://localhost:5000/api/v1'
-      }
-    ]
-  },
-  apis: ['./routes/*.js']
-};
+// const swaggerOptions = {
+//   swaggerDefinition: {
+//     openapi: '3.0.0',
+//     info: {
+//       title: 'Libary API',
+//       version: '1.0.0',
+//       description: 'A simple libary API'
+//     },
+//     servers: [
+//       {
+//         url: 'http://localhost:5000/api/v1'
+//       }
+//     ]
+//   },
+//   apis: ['./routes/*.js']
+// };
 
-const swaggerDocs = swaggerJsDoc(swaggerOptions);
-app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+// const swaggerDocs = swaggerJsDoc(swaggerOptions);
+// app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 // Cookie parser
 app.use(cookieParser());

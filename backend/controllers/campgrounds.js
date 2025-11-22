@@ -116,7 +116,7 @@ exports.deleteCampground = async (req, res, next) => {
         }
 
         await Booking.deleteMany({ campground: req.params.id });
-        await campground.deleteOne();
+        await campground.deleteOne({ _id: req.params.id });
 
         return res.status(200).json({ success: true, data: {} });
     } catch (err) {
